@@ -14,7 +14,7 @@ var test = require('plum-test');
 
 var options = {
   base: 'path/to/your/plum/stylesheets',
-  stylesheets: 'path/to/your/compiled/css/stylesheets',
+  stylesheets: ['path/to/your/compiled/css/stylesheets'],
   tests: [ 'modules/', 'units/', 'pages/' ],
   results: 'path/to/save/results/to',
 };
