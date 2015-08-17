@@ -9,17 +9,19 @@
 
 ## Usage
 
+### Node
+
 ```javascript
-var test = require('plum-test');
+var plumTest = require('plum-test');
 
 var options = {
-  base: 'path/to/your/plum/stylesheets',
-  stylesheets: ['path/to/your/compiled/css/stylesheets'],
-  tests: [ 'modules/', 'units/', 'pages/' ],
+  base: 'path/to/plum/directory',
+  stylesheets: ['path/to/compiled/stylesheets'],
+  tests: ['path/to/tests', 'path/to/more/tests'],
   results: 'path/to/save/results/to',
 };
 
-test(options, function(err, response) {
+plumTest(options, function(err, response) {
   if (err) {
     return err;
   }
@@ -27,6 +29,15 @@ test(options, function(err, response) {
 });
 ```
 
+### CLI
+
+```bash
+plum-test
+  --base='path/to/plum/directory'
+  --stylesheets='path/to/compiled/stylesheets'
+  --tests='path/to/tests, path/to/more/tests'
+  --results='./path/to/save/results/to'
+```
 
 ## API
 

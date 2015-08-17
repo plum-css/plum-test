@@ -44,12 +44,12 @@ var test = function test(options, cb) {
   (0, _plumFixture2['default'])(optionsFixture, function (err, res) {
     if (err) {
       return cb(err);
-    };
+    }
     (0, _plumRegression2['default'])(optionsRegression, function (err, res) {
       if (err) {
-        cb(err);
-      };
-      cb(null, res);
+        return cb(err);
+      }
+      return cb(null, res);
     });
   });
 };
