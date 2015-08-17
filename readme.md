@@ -21,11 +21,11 @@ var options = {
   results: 'path/to/save/results/to',
 };
 
-plumTest(options, function(err, response) {
+plumTest(options, function(err, res) {
   if (err) {
     return err;
   }
-  return response;
+  return res;
 });
 ```
 
@@ -34,9 +34,9 @@ plumTest(options, function(err, response) {
 ```bash
 plum-test
   --base='path/to/plum/directory'
-  --stylesheets='path/to/compiled/stylesheets'
+  --stylesheets='path/to/compiled/stylesheet, path/to/another/compiled/stylesheet'
   --tests='path/to/tests, path/to/more/tests'
-  --results='./path/to/save/results/to'
+  --results='path/to/save/results/to'
 ```
 
 ## API
