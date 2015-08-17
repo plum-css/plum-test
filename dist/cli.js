@@ -14,8 +14,12 @@ var _indexJs2 = _interopRequireDefault(_indexJs);
 var args = (0, _minimist2['default'])(process.argv.slice(2));
 var options = {
   base: args.base,
-  stylesheets: args.stylesheets.split(','),
-  tests: args.tests.split(','),
+  stylesheets: args.stylesheets.split(',').map(function (path) {
+    return path.trim();
+  }),
+  tests: args.tests.split(',').map(function (path) {
+    return path.trim();
+  }),
   results: args.results
 };
 

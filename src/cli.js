@@ -6,8 +6,8 @@ import test from './index.js';
 const args    = minimist(process.argv.slice(2));
 const options = {
   base        : args.base,
-  stylesheets : args.stylesheets.split(','),
-  tests       : args.tests.split(','),
+  stylesheets : args.stylesheets.split(',').map(path => path.trim()),
+  tests       : args.tests.split(',').map(path => path.trim()),
   results     : args.results
 };
 
