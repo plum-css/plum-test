@@ -28,7 +28,7 @@ const test = (options, cb) => {
   const optionsFixture    = {stylesheets: stylesheets, files: tests, destination: fixtures};
   const optionsRegression = {stylesheets: base, tests: tests, fixtures: fixtures, results: results, failures: results};
 
-  fixture( optionsFixture, (err, res) => {
+  fixture(optionsFixture, (err, res) => {
     if (err) {
       return cb(err);
     }
