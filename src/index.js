@@ -7,32 +7,33 @@
  */
 import fixture from 'plum-fixture';
 import regression from 'plum-regression';
+import fs from 'fs';
+import path from 'path';
 
 /*
  * Builds and runs visual regression tests against plum stylesheets.
  *
- * @param {object.string} options.base - the base plum stylesheets directory.
+ * @param {object.string} options.src - the src plum stylesheets directory.
+ * @param {object.string} options.dest - path where the results should be stored.
  * @param {object.array}  options.stylesheets - array of compiled css stylesheets.
- * @param {object.array}  options.tests - array of files and/or directories where the tests are located.
- * @param {object.string} options.results - path where the results should be stored.
- * @param {function}      callback         - callback method thats executed after the test command has been run.
+ * @param {function}      callback - callback method thats executed after the test command has been run.
  */
 const test = (options, cb) => {
-  const base        = options.base;
+  const src         = options.src;
+  const fixtures    = options.dest + '/fixtures';
+  const failures    = options.dest + '/failures';
+  const results     = options.dest + '/results';
   const stylesheets = options.stylesheets;
-  const fixtures    = options.results + '/fixtures';
-  const failures    = options.results + '/failures';
-  const results     = options.results + '/results';
-  const tests       = options.tests;
+  const tests       = fs.readdirSync(src)
+    .filter(file => ['modules', 'units', 'pages', 'layouts'].indexOf(file) !== -1)
+    .map(file => path.join(src, file))
+    .filter(file => fs.statSync(file).isDirectory());
 
-  const optionsFixture    = {stylesheets: stylesheets, files: tests, destination: fixtures};
-  const optionsRegression = {stylesheets: base, tests: tests, fixtures: fixtures, results: results, failures: results};
-
-  fixture(optionsFixture, (err, res) => {
+  fixture({stylesheets: stylesheets, files: tests, destination: fixtures}, (err, res) => {
     if (err) {
       return cb(err);
     }
-    regression(optionsRegression, (err, res) => {
+    regression({stylesheets: src, tests: tests, fixtures: fixtures, results: results, failures: failures}, (err, res) => {
       if (err) {
         return cb(err);
       }

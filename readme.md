@@ -15,10 +15,9 @@
 var plumTest = require('plum-test');
 
 var options = {
-  base: 'path/to/plum/directory',
+  src: 'path/to/plum/directory',
+  dest: 'path/to/save/results/to',
   stylesheets: ['path/to/compiled/stylesheets'],
-  tests: ['path/to/tests', 'path/to/more/tests'],
-  results: 'path/to/save/results/to',
 };
 
 plumTest(options, function(err, res) {
@@ -33,22 +32,20 @@ plumTest(options, function(err, res) {
 
 ```bash
 plum-test
-  --base='path/to/plum/directory'
+  --src='path/to/plum/directory'
+  --dest='path/to/save/results/to'
   --stylesheets='path/to/compiled/stylesheet, path/to/another/compiled/stylesheet'
-  --tests='path/to/tests, path/to/more/tests'
-  --results='path/to/save/results/to'
 ```
 
 ## API
 
 ### test( options )
 
-Name                | Type     | Argument     | Description
---------------------|----------|--------------|------------
-options.base        | `string` | `<required>` | the base path to your plum stylesheets.
-options.stylesheets | `array`  | `<required>` | the path to your compiles css stylesheets.
-options.tests       | `array`  | `<required>` | files and/or directories containing the tests to run.
-options.results     | `string` | `<required>` | the path to save the test results to.
+Name                | Type            | Argument     | Description
+--------------------|-----------------|--------------|------------
+options.src         | `string`        | `<required>` | the src path to your plum stylesheets.
+options.dest        | `string`        | `<required>` | the path to save the test results to.
+options.stylesheets | `array|string`  | `<required>` | the path to your compiled css stylesheets.
 
 #### callback( error, response )
 
