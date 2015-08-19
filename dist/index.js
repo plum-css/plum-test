@@ -21,31 +21,41 @@ var _plumRegression = require('plum-regression');
 
 var _plumRegression2 = _interopRequireDefault(_plumRegression);
 
+var _fs = require('fs');
+
+var _fs2 = _interopRequireDefault(_fs);
+
+var _path = require('path');
+
+var _path2 = _interopRequireDefault(_path);
+
 /*
  * Builds and runs visual regression tests against plum stylesheets.
  *
- * @param {object.string} options.base - the base plum stylesheets directory.
+ * @param {object.string} options.src - the src plum stylesheets directory.
+ * @param {object.string} options.dest - path where the results should be stored.
  * @param {object.array}  options.stylesheets - array of compiled css stylesheets.
- * @param {object.array}  options.tests - array of files and/or directories where the tests are located.
- * @param {object.string} options.results - path where the results should be stored.
- * @param {function}      callback         - callback method thats executed after the test command has been run.
+ * @param {function}      callback - callback method thats executed after the test command has been run.
  */
 var test = function test(options, cb) {
-  var base = options.base;
+  var src = options.src;
+  var fixtures = options.dest + '/fixtures';
+  var failures = options.dest + '/failures';
+  var results = options.dest + '/results';
   var stylesheets = options.stylesheets;
-  var fixtures = options.results + '/fixtures';
-  var failures = options.results + '/failures';
-  var results = options.results + '/results';
-  var tests = options.tests;
+  var tests = _fs2['default'].readdirSync(src).filter(function (file) {
+    return ['modules', 'units', 'pages', 'layouts'].indexOf(file) !== -1;
+  }).map(function (file) {
+    return _path2['default'].join(src, file);
+  }).filter(function (file) {
+    return _fs2['default'].statSync(file).isDirectory();
+  });
 
-  var optionsFixture = { stylesheets: stylesheets, files: tests, destination: fixtures };
-  var optionsRegression = { stylesheets: base, tests: tests, fixtures: fixtures, results: results, failures: results };
-
-  (0, _plumFixture2['default'])(optionsFixture, function (err, res) {
+  (0, _plumFixture2['default'])({ stylesheets: stylesheets, files: tests, destination: fixtures }, function (err, res) {
     if (err) {
       return cb(err);
     }
-    (0, _plumRegression2['default'])(optionsRegression, function (err, res) {
+    (0, _plumRegression2['default'])({ stylesheets: src, tests: tests, fixtures: fixtures, results: results, failures: failures }, function (err, res) {
       if (err) {
         return cb(err);
       }
