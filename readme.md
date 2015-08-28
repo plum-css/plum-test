@@ -37,6 +37,16 @@ plum-test
   --stylesheets='path/to/compiled/stylesheet, path/to/another/compiled/stylesheet'
 ```
 
+To run only a specific test(s) you can pass a comma `,` seperated list of paths to the the `--tests`.
+
+```bash
+plum-test
+  --src='path/to/plum/directory'
+  --dest='path/to/save/results/to'
+  --stylesheets='path/to/compiled/stylesheet, path/to/another/compiled/stylesheet'
+  --tests='path/to/plum/directory/modules/module-one' # only test the module-one module.
+```
+
 ## API
 
 ### test( options )
@@ -45,7 +55,8 @@ Name                | Type            | Argument     | Description
 --------------------|-----------------|--------------|------------
 options.src         | `string`        | `<required>` | the src path to your plum stylesheets.
 options.dest        | `string`        | `<required>` | the path to save the test results to.
-options.stylesheets | `array|string`  | `<required>` | the path to your compiled css stylesheets.
+options.stylesheets | `array|string`  | `<required>` | the paths to your compiled css stylesheets.
+options.tests       | `array|string`  | `<optional>` | the paths to the tests to be run.
 
 #### callback( error, response )
 

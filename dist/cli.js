@@ -17,7 +17,11 @@ var options = {
   dest: args.dest,
   stylesheets: args.stylesheets.split(',').map(function (path) {
     return path.trim();
+  }),
+  tests: args.tests.split(',').map(function (path) {
+    return path.trim();
   })
+
 };
 
 (0, _indexJs2['default'])(options, function (err, res) {

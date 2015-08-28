@@ -7,7 +7,9 @@ const args    = minimist(process.argv.slice(2));
 const options = {
   src: args.src,
   dest: args.dest,
-  stylesheets: args.stylesheets.split(',').map(path => path.trim())
+  stylesheets: args.stylesheets.split(',').map(path => path.trim()),
+  tests: args.tests.split(',').map(path => path.trim())
+
 };
 
 test(options, (err, res) => {

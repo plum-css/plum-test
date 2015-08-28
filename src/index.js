@@ -16,6 +16,7 @@ import path from 'path';
  * @param {object.string} options.src - the src plum stylesheets directory.
  * @param {object.string} options.dest - path where the results should be stored.
  * @param {object.array}  options.stylesheets - array of compiled css stylesheets.
+ * @param {object.array}  [options.tests=['modules', 'units', 'pages', 'layouts']] - directories to test.
  * @param {function}      callback - callback method thats executed after the test command has been run.
  */
 const test = (options, cb) => {
@@ -24,7 +25,7 @@ const test = (options, cb) => {
   const failures    = options.dest + '/failures';
   const results     = options.dest + '/results';
   const stylesheets = options.stylesheets;
-  const tests       = fs.readdirSync(src)
+  const tests       = options.tests || fs.readdirSync(src)
     .filter(file => ['modules', 'units', 'pages', 'layouts'].indexOf(file) !== -1)
     .map(file => path.join(src, file))
     .filter(file => fs.statSync(file).isDirectory());

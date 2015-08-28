@@ -1,7 +1,7 @@
 {
   "name": "plum-test",
   "description": "Build and run visual regression tests against plum stylesheets.",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "homepage": "https://github.com/plum-css/plum-test",
   "author": {
     "name": "Jason Bellamy",
@@ -21,10 +21,12 @@
     "node": ">= 0.10.0"
   },
   "scripts": {
+    "build": "babel -d dist src",
     "clean": "rm -rf dist && mkdir dist",
-    "build-dist": "babel -d dist src",
-    "build": "npm run clean && npm run build-dist",
-    "test": "mocha --compilers js:babel/register"
+    "watch": "babel -w -d dist src",
+    "test": "mocha --compilers js:babel/register",
+    "preversion": "npm run clean && npm run build",
+    "postpublish": "git push && git push --tag"
   },
   "bin": "dist/cli.js",
   "dependencies": {
