@@ -35,6 +35,7 @@ var _path2 = _interopRequireDefault(_path);
  * @param {object.string} options.src - the src plum stylesheets directory.
  * @param {object.string} options.dest - path where the results should be stored.
  * @param {object.array}  options.stylesheets - array of compiled css stylesheets.
+ * @param {object.array}  [options.tests=['modules', 'units', 'pages', 'layouts']] - directories to test.
  * @param {function}      callback - callback method thats executed after the test command has been run.
  */
 var test = function test(options, cb) {
@@ -43,7 +44,7 @@ var test = function test(options, cb) {
   var failures = options.dest + '/failures';
   var results = options.dest + '/results';
   var stylesheets = options.stylesheets;
-  var tests = _fs2['default'].readdirSync(src).filter(function (file) {
+  var tests = options.tests || _fs2['default'].readdirSync(src).filter(function (file) {
     return ['modules', 'units', 'pages', 'layouts'].indexOf(file) !== -1;
   }).map(function (file) {
     return _path2['default'].join(src, file);
