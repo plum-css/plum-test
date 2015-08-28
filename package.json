@@ -1,7 +1,7 @@
 {
   "name": "plum-test",
   "description": "Build and run visual regression tests against plum stylesheets.",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "homepage": "https://github.com/plum-css/plum-test",
   "author": {
     "name": "Jason Bellamy",
