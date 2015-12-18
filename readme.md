@@ -2,6 +2,12 @@
 
 > Build and run visual regression tests against plum stylesheets.
 
+
+## Dependencies
+- [CasperJS](http://casperjs.org/) - 1.1.0+
+- [PhantomJS](http://phantomjs.org/) - 1.8.0 < 2.0
+
+
 ## Getting Started
 
 - Install with [NPM](https://www.npmjs.org/) - `npm install --save plum-test`
